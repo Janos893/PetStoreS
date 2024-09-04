@@ -1,6 +1,7 @@
 package com.example.sandbox.getPet;
 
 import com.example.sandbox.Common;
+import com.example.sandbox.util.swagger.definitions.Status;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -9,6 +10,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import utils.report.TestListener;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
@@ -31,34 +33,36 @@ public class petDetailTest extends Common {
         Response response2 = getUrl(petById.replace("{petId}", id));
         Assert.assertEquals(response2.getStatusCode(), 200, "Invalid response code");
 
-        System.out.println(response2.body().asString());
         SoftAssert softAssert = new SoftAssert();
         JsonPath jsonPath = new JsonPath(response2.body().asString());
 
-        softAssert.assertNotNull(jsonPath.get("id"), "id is missing");
-        softAssert.assertTrue(jsonPath.get("id") instanceof Long, "id format is not correct");
+        softAssert.assertNotNull(jsonPath.get("id"), "id is missing!");
+        softAssert.assertTrue(jsonPath.get("id") instanceof Long, "id format is not correct!");
 
-        softAssert.assertNotNull(jsonPath.get("category.id"), "category.id is missing");
-        softAssert.assertTrue(jsonPath.get("category.id") instanceof Integer, "category.id format is not correct");
+        softAssert.assertNotNull(jsonPath.get("category.id"), "category.id is missing!");
+        softAssert.assertTrue(jsonPath.get("category.id") instanceof Integer, "category.id format is not correct!");
 
-        softAssert.assertNotNull(jsonPath.get("category.name"), "category.name is missing");
-        softAssert.assertTrue(jsonPath.get("category.name") instanceof String, "category.name format is not correct");
+        softAssert.assertNotNull(jsonPath.get("category.name"), "category.name is missing!");
+        softAssert.assertTrue(jsonPath.get("category.name") instanceof String, "category.name format is not correct!");
 
-        softAssert.assertNotNull(jsonPath.get("name"), "name is missing");
-        softAssert.assertTrue(jsonPath.get("name") instanceof String, "name format is not correct");
+        softAssert.assertNotNull(jsonPath.get("name"), "name is missing!");
+        softAssert.assertTrue(jsonPath.get("name") instanceof String, "name format is not correct!");
 
-        softAssert.assertNotNull(jsonPath.get("photoUrls[0]"), "photoUrls is missing");
-        softAssert.assertTrue(jsonPath.get("photoUrls[0]") instanceof String, "photoUrls format is not correct");
+        softAssert.assertNotNull(jsonPath.get("photoUrls[0]"), "photoUrls is missing!");
+        softAssert.assertTrue(jsonPath.get("photoUrls[0]") instanceof String, "photoUrls format is not correct!");
 
-        softAssert.assertNotNull(jsonPath.get("tags[0].id"), "tags.id is missing");
-        softAssert.assertTrue(jsonPath.get("tags[0].id") instanceof Integer, "tags.id format is not correct");
+        softAssert.assertNotNull(jsonPath.get("tags[0].id"), "tags.id is missing!");
+        softAssert.assertTrue(jsonPath.get("tags[0].id") instanceof Integer, "tags.id format is not correct!");
 
-        softAssert.assertNotNull(jsonPath.get("tags[0].name"), "tags.name is missing");
-        softAssert.assertTrue(jsonPath.get("tags[0].name") instanceof String, "tags.name format is not correct");
+        softAssert.assertNotNull(jsonPath.get("tags[0].name"), "tags.name is missing!");
+        softAssert.assertTrue(jsonPath.get("tags[0].name") instanceof String, "tags.name format is not correct!");
 
-        softAssert.assertNotNull(jsonPath.get("status"), "status is missing");
-        softAssert.assertTrue(jsonPath.get("status") instanceof String, "status is not correct");
-        System.out.println(jsonPath.get("status").toString());
+        String status = jsonPath.get("status");
+        softAssert.assertNotNull(jsonPath.get("status"), "status is missing!");
+        softAssert.assertTrue(jsonPath.get("status") instanceof String, "status is not correct!");
+        if(!status.isEmpty()){
+            softAssert.assertTrue(isValidStatus(status), "status is not an enum value!");
+        }
         softAssert.assertAll();
 
     }
@@ -89,6 +93,11 @@ public class petDetailTest extends Common {
         softAssert.assertTrue(response.timeIn(TimeUnit.MILLISECONDS) < 500, "Response time is more than 500 ms!");
         softAssert.assertEquals(response.getStatusCode(), 400, "Invalid response code");
         softAssert.assertAll();
+    }
+
+    private boolean isValidStatus(String status){
+        return Arrays.stream(Status.values())
+                .anyMatch(e -> e.getValue().equals(status));
     }
 
 }

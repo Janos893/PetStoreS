@@ -59,6 +59,10 @@ public class Reporter {
         this.logJSON(responseBody);
     }
 
+    public void log(String logText){
+        this.right.log(Status.INFO, logText);
+    }
+
     private static String replaceNewLineCharsToHTMLLineBreaks(String requestOrResponseParams) {
         return requestOrResponseParams.replaceAll("\n", "<br>");
     }
@@ -77,15 +81,15 @@ public class Reporter {
     public void addResult(ITestResult result) {
         switch (result.getStatus()) {
             case 2:
-                this.left.fail("\ud83d\udc7f  " + result.getThrowable().getMessage() + " \ud83d\ude25");
+                this.left.fail("!!!!!!!!!!!!  " + result.getThrowable().getMessage() + " !!!!!!!!!!!!");
                 this.right.fail(result.getThrowable().getMessage());
                 break;
             case 3:
                 this.extent.removeTest(this.right);
-                this.left.skip("\ud83d\ude33  " + result.getThrowable().getMessage() + "  \ud83d\ude48");
+                this.left.skip("!!!!!!!!!!!!  " + result.getThrowable().getMessage() + "  !!!!!!!!!!!!");
                 break;
             default:
-                this.left.pass("\ud83e\udd73 Test passed! \ud83c\udf89");
+                this.left.pass("!!!!!!!!!!!! Test passed! !!!!!!!!!!!!");
         }
 
         this.extent.flush();

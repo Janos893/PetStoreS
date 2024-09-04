@@ -4,6 +4,7 @@ package utils.report;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import org.testng.annotations.Test;
 
 public class TestListener implements ITestListener {
     Reporter reporter = new Reporter();
@@ -17,6 +18,11 @@ public class TestListener implements ITestListener {
         String methodName = result.getMethod().getMethodName();
         String[] categories = result.getMethod().getGroups();
         this.reporter.makeLeft(result.getMethod().getDescription(), currentClassname, methodName, categories);
+        this.reporter.log("Method name: " + result.getMethod().getMethodName());
+        String tcName = result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(Test.class).testName();
+        if(!tcName.isEmpty()) {
+            this.reporter.log("Test case name: " + tcName);
+        }
     }
 
     public void onTestSuccess(ITestResult result) {

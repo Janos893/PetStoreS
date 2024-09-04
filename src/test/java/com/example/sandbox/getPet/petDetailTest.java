@@ -95,9 +95,4 @@ public class petDetailTest extends Common {
         softAssert.assertAll();
     }
 
-    private boolean isValidStatus(String status){
-        return Arrays.stream(Status.values())
-                .anyMatch(e -> e.getValue().equals(status));
-    }
-
 }

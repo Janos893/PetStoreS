@@ -1,11 +1,13 @@
 package com.example.sandbox;
 
+import com.example.sandbox.util.swagger.definitions.Status;
 import io.restassured.response.Response;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 import utils.report.ReportingFilter;
 
+import java.util.Arrays;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
@@ -17,6 +19,11 @@ public class Common extends Endpoints {
 
     @BeforeMethod(alwaysRun = true)
     public void baseBeforeMethod(ITestContext context) {filter = new ReportingFilter(context);}
+
+    public boolean isValidStatus(String status){
+        return Arrays.stream(Status.values())
+                .anyMatch(e -> e.getValue().equals(status));
+    }
 
     //----------------------------------GET----------------------------------
     public Response getUrl(String endpoint){

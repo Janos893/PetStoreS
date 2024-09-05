@@ -20,6 +20,10 @@ public class Common extends Endpoints {
     @BeforeMethod(alwaysRun = true)
     public void baseBeforeMethod(ITestContext context) {filter = new ReportingFilter(context);}
 
+    public boolean isNumber(Object object){
+       return  (object instanceof Integer || object instanceof Long);
+    }
+
     public boolean isValidStatus(String status){
         return Arrays.stream(Status.values())
                 .anyMatch(e -> e.getValue().equals(status));

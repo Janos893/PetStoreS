@@ -37,15 +37,7 @@ public class petDetailTest extends Common {
         JsonPath jsonPath = new JsonPath(response2.body().asString());
 
         softAssert.assertNotNull(jsonPath.get("id"), "id is missing!");
-        String idString = jsonPath.get("id").toString();
-        try{
-            int idInt = Integer.parseInt(idString);
-            softAssert.assertTrue(jsonPath.get("id") instanceof Integer, "id format is not correct!");
-        }
-        catch (NumberFormatException e){
-            long idLong = Long.parseLong(idString);
-            softAssert.assertTrue(jsonPath.get("id") instanceof Long, "id format is not correct!");
-        }
+        softAssert.assertTrue(isNumber(jsonPath.get("id")), "id format is not correct!");
 
         softAssert.assertNotNull(jsonPath.get("category.id"), "category.id is missing!");
         softAssert.assertTrue(jsonPath.get("category.id") instanceof Integer, "category.id format is not correct!");

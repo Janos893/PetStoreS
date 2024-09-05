@@ -10,7 +10,8 @@
 - Az 1.b.ii feladat miatt (500 milisecond alatt volt a válaszidő) folyamatosan hibát fog jelezni a teszt, rendszerint 1500 ms a válaszidő. Szerintem ennek problémának a kiküszöbölése egy Pageable jó megoldás lenne, hogy adott esetben ne az összes adat érkezzen meg, hanem csak 10 például. 
 
 ## 2. feladat
-### A 2. feladatot a PetLifeCycle osztályban hoztam létre.
+### A 2. feladatot a PetLifeCycleTest osztályban hoztam létre.
+- Az eredeti PetLifeCycle osztály nevét meg kellett változtatnom PetLifeCycleTest-re, ugyanis a keretrendszer figyel a Test osztálynévre. Enélkül az mvn clean test parancs kiadásakor ez az osztály kimaradt volna. 
 - Mivel folyamat tesztet kellett csinálni és például a delete függ a create-től, ezért ki kellett alakítanom egy minimális dependenciát.
 - Érdekesség: Nem biztos, hogy fontos, de a HYDRAIMAGE final static String 404-et dob.
 
@@ -19,6 +20,7 @@
 
 ## 4. feladat
 ### A 4. feladat a Listener-ben van.
+- A logolás az Extent report-ba raktam.
 
 - Külön programkönyvtárat nem húztam be.
 

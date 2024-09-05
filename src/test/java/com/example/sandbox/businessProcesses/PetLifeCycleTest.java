@@ -6,7 +6,6 @@ import com.example.sandbox.util.swagger.definitions.Item;
 import com.example.sandbox.util.swagger.definitions.PetBody;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.openqa.selenium.json.Json;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.Listeners;
@@ -14,15 +13,13 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import utils.report.TestListener;
 
-import java.util.Optional;
-
 import static com.example.sandbox.util.Tools.generateRandomNumber;
 import static com.example.sandbox.util.body.pet.JsonBody.createJsonBody;
 import static com.example.sandbox.util.constans.Tags.SMOKE;
 import static com.example.sandbox.util.constans.TestData.*;
 
 @Listeners(TestListener.class)
-public class PetLifeCycle extends Common {
+public class PetLifeCycleTest extends Common {
     @Test(enabled = true,groups = {SMOKE},description ="description")
     public void Test1(){
 

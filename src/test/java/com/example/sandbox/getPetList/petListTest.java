@@ -38,9 +38,4 @@ public class petListTest extends Common {
         Assert.assertEquals(response.getStatusCode(),200,"Invalid response code");
 
     }
-
-    @Test(groups = {SMOKE}, description ="description")
-    public void test3(){
-
-    }
 }

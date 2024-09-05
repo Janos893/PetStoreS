@@ -48,14 +48,14 @@ public class petDetailTest extends Common {
         softAssert.assertNotNull(jsonPath.get("name"), "name is missing!");
         softAssert.assertTrue(jsonPath.get("name") instanceof String, "name format is not correct!");
 
-        softAssert.assertNotNull(jsonPath.get("photoUrls[0]"), "photoUrls is missing!");
-        softAssert.assertTrue(jsonPath.get("photoUrls[0]") instanceof String, "photoUrls format is not correct!");
+        softAssert.assertNotNull(jsonPath.get("photoUrls[0]"), "photoUrls[0] is missing!");
+        softAssert.assertTrue(jsonPath.get("photoUrls[0]") instanceof String, "photoUrls[0] format is not correct!");
 
-        softAssert.assertNotNull(jsonPath.get("tags[0].id"), "tags.id is missing!");
-        softAssert.assertTrue(jsonPath.get("tags[0].id") instanceof Integer, "tags.id format is not correct!");
+        softAssert.assertNotNull(jsonPath.get("tags[0].id"), "tags[0].id is missing!");
+        softAssert.assertTrue(jsonPath.get("tags[0].id") instanceof Integer, "tags[0].id format is not correct!");
 
-        softAssert.assertNotNull(jsonPath.get("tags[0].name"), "tags.name is missing!");
-        softAssert.assertTrue(jsonPath.get("tags[0].name") instanceof String, "tags.name format is not correct!");
+        softAssert.assertNotNull(jsonPath.get("tags[0].name"), "tags[0].name is missing!");
+        softAssert.assertTrue(jsonPath.get("tags[0].name") instanceof String, "tags[0].name format is not correct!");
 
         String status = jsonPath.get("status");
         softAssert.assertNotNull(jsonPath.get("status"), "status is missing!");
